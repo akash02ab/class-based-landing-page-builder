@@ -1,17 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import {
+    BrowserRouter as Router,
+    Redirect,
+    Route,
+    Switch,
+} from "react-router-dom";
+import "./style.css";
+import App from "./components/App";
+import Countdown from "./components/Countdown";
+import NoMatch from "./components/NoMatch";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    <Router>
+        <Switch>
+            <Route exact path="/">
+                <App />
+            </Route>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+            <Route path="/promo">
+                <Countdown />
+            </Route>
+
+            <Route path="/404">
+                <NoMatch />
+            </Route>
+
+            <Redirect to="/404" />
+        </Switch>
+    </Router>,
+    document.getElementById("root")
+);
